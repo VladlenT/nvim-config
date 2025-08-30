@@ -50,6 +50,12 @@ return {
             opts = {
                 keymap = {
                     preset = 'default',
+                },
+                cmdline = {
+                    keymap = {
+                        preset = 'inherit',
+                        ["<C-space>"] = { "show" },
+                    }
                 }
             }
         }
