@@ -23,6 +23,17 @@ return {
     config = function()
         -- Enable Telescope extensions if they are installed
         require('telescope').load_extension('fzy_native')
+        require('telescope').setup({
+            defaults = {
+                path_display = { 'smart' },
+                layout_strategy = 'vertical',
+                layout_config = {
+                    width = 0.9,
+                    preview_height = 0.5
+                }
+            }
+        })
+
 
         local builtin = require('telescope.builtin')
         vim.keymap.set('n', '<leader>fh', builtin.help_tags, { desc = '[f]ind [H]elp' })

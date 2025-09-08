@@ -28,5 +28,6 @@ return {
 
         vim.keymap.set('n', '<leader>tt', api.tree.toggle, opts('[t]ree [t]oggle'));
         vim.keymap.set('n', '<leader>tf', api.tree.open, opts('[t]ree [f]ocus'));
+        vim.keymap.set('n', '<leader>tff', api.tree.find_file, opts('[t]ree [f]ocus [f]ile'));
     end,
 }

@@ -41,7 +41,7 @@ vim.opt.splitbelow = true;
 vim.opt.shiftwidth = 4;
 
 -- Displays which-key popup sooner
-vim.opt.timeoutlen = 500
+vim.opt.timeoutlen = 600
 
 vim.opt.undofile = true;
 -- Decrease update time
