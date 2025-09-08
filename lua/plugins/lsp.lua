@@ -58,7 +58,17 @@ return {
                     }
                 }
             }
-        }
+        },
+        {
+            "folke/lazydev.nvim",
+            ft = "lua", -- load only when editing Lua
+            opts = {
+                library = {
+                    -- Add neovim runtime & plugins for Lua LSP
+                    { path = "luvit-meta/library", words = { "vim%.uv" } },
+                },
+            },
+        },
     },
     opts = {
         servers = {
@@ -79,9 +89,13 @@ return {
     },
     config = function(_, opts)
         require("mason").setup()
-        require("mason-lspconfig").setup()
+        require("mason-lspconfig").setup({
+            automatic_enable = false,
+        })
 
         local lspconfig = require("lspconfig")
+
+        print("LSP Setup")
 
         for server, config in pairs(opts.servers) do
             config.capabilities = require('blink.cmp').get_lsp_capabilities(config.capabilities)

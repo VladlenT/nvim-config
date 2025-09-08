@@ -6,5 +6,5 @@ return {
         "antoinemadec/FixCursorHold.nvim",
         "nvim-treesitter/nvim-treesitter",
         "nvim-neotest/neotest-jest"
-    }
+    },
 }
