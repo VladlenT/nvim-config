@@ -11,6 +11,7 @@ return {
             -- Fugitive keybindings
             map("s", ":Git<CR>a", "[S]tatus")
             map("c", ":Git add -A | Git commit --verbose<CR>", "[C]ommit")
+            map("f", ":Git fetch --prune", "[F]etch")
             map("p", ":Git push<CR>", "[P]ush")
             map("d", ":Gdiffsplit<CR>", "[D]iff")
             map("D", ":Gdiffsplit!<CR>", "[D]iff 3-way")
