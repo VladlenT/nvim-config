@@ -1,16 +1,38 @@
-local function enableCompletion(client, buf)
-    if client:supports_method('textDocument/completion') then
-        vim.lsp.completion.enable(true, client.id, buf, { autotrigger = true })
+local prettier_ft = {
+    "javascript", "typescript", "css", "scss", "html", "json"
+}
+
+local function should_use_prettier(buf)
+    local ft = vim.bo[buf].filetype
+    for _, t in ipairs(prettier_ft) do
+        if t == ft then return true end
     end
+    return false
 end
 
 local function formatOnSave(client, buf)
     if client:supports_method('textDocument/formatting') then
         -- Format the current buffer on save
+        local grp = vim.api.nvim_create_augroup("FormatOnSave", { clear = false })
         vim.api.nvim_create_autocmd('BufWritePre', {
+            group = grp,
             buffer = buf,
             callback = function()
-                vim.lsp.buf.format({ bufnr = buf, id = client.id })
+                vim.lsp.buf.format({
+                    bufnr = buf,
+                    id = client.id,
+                    async = false,
+                    filter = function(c)
+                        local is_null_ls = c.name == "null-ls"
+
+                        if should_use_prettier(buf) then
+                            local has_null = vim.lsp.get_clients({ name = "null-ls", bufnr = buf }) > 0
+                            return has_null and is_null_ls or true
+                        end
+
+                        return client.id == c.id
+                    end
+                })
             end,
         })
     end
