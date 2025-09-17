@@ -26,7 +26,7 @@ local function formatOnSave(client, buf)
                         local is_null_ls = c.name == "null-ls"
 
                         if should_use_prettier(buf) then
-                            local has_null = vim.lsp.get_clients({ name = "null-ls", bufnr = buf }) > 0
+                            local has_null = #vim.lsp.get_clients({ name = "null-ls", bufnr = buf }) > 0
                             return has_null and is_null_ls or true
                         end
 
