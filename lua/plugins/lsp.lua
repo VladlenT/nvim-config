@@ -1,5 +1,5 @@
 local prettier_ft = {
-    "javascript", "typescript", "css", "scss", "html", "json"
+    "javascript", "typescript", "css", "scss", "html", "json", "htmlangular"
 }
 
 local function should_use_prettier(buf)
@@ -107,6 +107,19 @@ return {
                     }
                 }
             },
+            pylsp = {
+                settings = {
+                    pyflakes = { enabled = true },     -- linting
+                    pycodestyle = { enabled = false }, -- disable if using black/ruff
+                    mccabe = { enabled = false },      -- complexity warnings
+                    yapf = { enabled = false },        -- disable yapf if using black
+                    black = { enabled = true },        -- formatting
+                    autopep8 = { enabled = false },    -- avoid conflicts
+                    pylint = { enabled = false },      -- heavy, often noisy
+                    ruff = { enabled = true }          -- if you install ruff-lsp
+
+                }
+            }
         }
     },
     config = function(_, opts)
